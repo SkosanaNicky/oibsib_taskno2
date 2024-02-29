@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tempareture Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Temperature Converter</h2>
+        <input type="number" id="temperatureInput" placeholder="Enter temperature">
+        <select id="unitSelect">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+            <option value="kelvin">Kelvin</option>
+        </select>
+        <button onclick ="convertTemperature()">Convert</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        function convertTemperature(){
+            const temperatureInput = parseFloat(document.getElementById("temperatureInput").value);
+            const unitSelect = document.getElementById("unitSelect").value;
+            let convertedTemperature;
+            let resultText;
+
+            if (isNaN(temperatureInput)){
+                resultText="Please enter a valid number for Temperature.";
+            } else{
+                switch (unitSelect){
+                    case "celsius":
+                        convertedTemperature = temperatureInput * 9 / 5 + 32;
+                        resultText = `${temperatureInput}°C = ${convertedTemperature.toFixed(2)}°F`;
+                        break;
+                    case "fahrenheit":
+                        convertedTemperature = (temperatureInput - 32) * 5 / 9;
+                        resultText = `${temperatureInput}°F = ${convertedTemperature.toFixed(2)}°C`;
+                        break;
+                    case "kelvin":
+                        convertedTemperature = temperatureInput + 273.15;
+                        resultText = `${temperatureInput} K = ${convertedTemperature.toFixed(2)}°C`;
+                        break;
+                    default:
+                        resultText = "Please select a unit for conversion.";
+                }
+            }
+            document.getElementById("result").innerText = resultText;
+        }
+    </script>
+</body>
+</html>
